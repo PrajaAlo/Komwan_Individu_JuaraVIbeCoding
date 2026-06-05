@@ -1,0 +1,6 @@
+{
+  "name": "Asisten Gizi AI",
+  "description": "Asisten virtual untuk mengecek nutrisi dan kalori makanan Indonesia",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

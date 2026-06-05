@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with physical data and health goals.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string", "description": "Google display name" },
+        "age": { "type": "number" },
+        "gender": { "type": "string", "enum": ["male", "female"] },
+        "weight": { "type": "number", "description": "Weight in kg" },
+        "height": { "type": "number", "description": "Height in cm" },
+        "activityLevel": { "type": "number", "description": "Activity multiplier, e.g. 1.2 for sedentary" },
+        "healthGoal": { "type": "string", "enum": ["weight_loss", "muscle_building", "maintenance"] },
+        "dailyTargets": { 
+          "type": "object",
+          "properties": {
+            "calories": { "type": "number" },
+            "protein": { "type": "number" },
+            "carbs": { "type": "number" },
+            "fat": { "type": "number" },
+            "fiber": { "type": "number" },
+            "sodium": { "type": "number" },
+            "sugar": { "type": "number" }
+          }
+        },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "ChatHistory": {
+      "title": "Chat History",
+      "description": "User chat records with the AI.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "messages": { "type": "array" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["userId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "users/{userId}/chats/{chatId}": {
+      "schema": { "$ref": "#/entities/ChatHistory" },
+      "description": "Chat sessions for a user"
+    }
+  }
+}
